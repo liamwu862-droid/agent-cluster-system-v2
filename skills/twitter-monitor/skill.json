@@ -1,0 +1,16 @@
+{
+  "name": "twitter-monitor",
+  "description": "Monitor Twitter/X users for new tweets and send notifications. Track Silicon Valley leaders, tech news, or any accounts you care about.",
+  "version": "1.0.0",
+  "author": "clawd",
+  "requires": {
+    "bins": ["curl", "jq"],
+    "env": ["TWITTER_BEARER_TOKEN"]
+  },
+  "commands": {
+    "monitor": "twitter-monitor.sh",
+    "add-user": "./add-user.sh",
+    "list-users": "cat users.txt",
+    "test": "./test-notification.sh"
+  }
+}

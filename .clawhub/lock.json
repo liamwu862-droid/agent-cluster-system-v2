@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "twitter": {
+      "version": "1.1.0",
+      "installedAt": 1770700865244
+    },
+    "x-twitter": {
+      "version": "2.3.1",
+      "installedAt": 1770700871125
+    },
+    "twitter-automation": {
+      "version": "0.1.0",
+      "installedAt": 1770700906507
+    }
+  }
+}

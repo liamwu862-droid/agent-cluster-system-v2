@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "repo": {
+    "root": "/Users/clawd/.openclaw/workspace",
+    "worktreeBase": "/Users/clawd/.openclaw/workspace/worktrees",
+    "mainBranch": "origin/main"
+  },
+  "agents": {
+    "codex": {
+      "command": "codex",
+      "description": "主力 - 后端逻辑、复杂bug、多文件重构",
+      "strengths": ["复杂逻辑", "跨文件推理", "边界情况处理"],
+      "useFor": ["后端开发", "bug修复", "架构重构"]
+    },
+    "claude": {
+      "command": "claude",
+      "description": "速度型 - 前端工作、UI实现",
+      "strengths": ["速度快", "git操作", "前端开发"],
+      "useFor": ["前端开发", "样式调整", "快速原型"]
+    },
+    "gemini": {
+      "command": "gemini",
+      "description": "设计师 - UI/UX设计",
+      "strengths": ["设计审美", "HTML/CSS"],
+      "useFor": ["UI设计", "组件设计", "视觉规范"]
+    }
+  },
+  "review": {
+    "enabled": true,
+    "reviewers": ["codex", "gemini"],
+    "skipClaude": true,
+    "autoComment": false
+  },
+  "notifications": {
+    "feishuWebhook": "https://open.feishu.cn/open-apis/bot/v2/hook/02fdfc79-889b-497d-894d-ffd8af32da14",
+    "onTaskStart": true,
+    "onPRCreated": true,
+    "onCIPassed": true,
+    "onFailed": true
+  },
+  "monitor": {
+    "intervalMinutes": 10,
+    "maxRetries": 3,
+    "cleanupTime": "02:00"
+  },
+  "requirements": {
+    "needTests": true,
+    "needScreenshots": true,
+    "minTestCoverage": 0,
+    "ciChecks": ["lint", "type-check", "test", "e2e"]
+  }
+}
