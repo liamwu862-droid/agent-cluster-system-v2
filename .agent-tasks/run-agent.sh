@@ -42,12 +42,12 @@ SAFE_TASK_ID="task-$TASK_ID"
 WORKTREE_DIR="$WORKTREE_BASE/feat-$SAFE_TASK_ID"
 BRANCH_NAME="feat/$SAFE_TASK_ID"
 
-# 创建 git worktree
+# 创建 git worktree（使用本地 main 分支或当前分支）
 cd "$REPO_ROOT"
-git fetch origin main 2>/dev/null || true
-git worktree add "$WORKTREE_DIR" -b "$BRANCH_NAME" origin/main 2>/dev/null || \
+BASE_BRANCH=$(git branch --show-current 2>/dev/null || echo "main")
+git worktree add "$WORKTREE_DIR" -b "$BRANCH_NAME" "$BASE_BRANCH" 2>/dev/null || \
     git worktree add "$WORKTREE_DIR" "$BRANCH_NAME" 2>/dev/null || \
-    (git branch -D "$BRANCH_NAME" 2>/dev/null; git worktree add "$WORKTREE_DIR" -b "$BRANCH_NAME" origin/main)
+    (git branch -D "$BRANCH_NAME" 2>/dev/null; git worktree add "$WORKTREE_DIR" -b "$BRANCH_NAME" "$BASE_BRANCH")
 
 # 安装依赖
 cd "$WORKTREE_DIR"

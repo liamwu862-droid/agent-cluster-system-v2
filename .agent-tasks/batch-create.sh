@@ -49,8 +49,9 @@ echo ""
 # 读取任务列表
 tasks=$(jq -c '.[]' "$TASKS_FILE")
 
-# 存储任务ID映射
-declare -A task_id_map
+# 存储任务ID映射 (使用临时文件替代关联数组)
+TASK_ID_MAP_FILE=$(mktemp)
+trap "rm -f $TASK_ID_MAP_FILE" EXIT
 
 # 第一轮：创建所有任务（标记依赖）
 echo "🚀 第一轮：创建任务..."
@@ -66,7 +67,7 @@ echo "$tasks" | while read task; do
     output=$(cd "$AGENT_DIR" && ./create-task.sh "$desc" "$agent" "$priority" 2>&1)
     
     # 提取任务ID（从输出中）
-    task_id=$(echo "$output" | grep -oP 'feat-[^-]+-\K[0-9]+' | head -1)
+    task_id=$(echo "$output" | grep -o 'feat-[^-]*-[0-9]*' | grep -o '[0-9]*$' | head -1)
     
     if [ -n "$task_id" ]; then
         echo "    ✅ 任务ID: $task_id"

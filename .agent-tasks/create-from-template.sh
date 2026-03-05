@@ -22,8 +22,8 @@ if [ -z "$TEMPLATE" ] || [ -z "$TASK_DESC" ]; then
 fi
 
 # 读取模板配置
-agent=$(jq -r ".templates.$TEMPLATE.agent" "$TEMPLATES_FILE" 2>/dev/null)
-additions=$(jq -r ".templates.$TEMPLATE.prompt_additions[]" "$TEMPLATES_FILE" 2>/dev/null)
+agent=$(jq -r ".templates[\"$TEMPLATE\"].agent" "$TEMPLATES_FILE" 2>/dev/null)
+additions=$(jq -r ".templates[\"$TEMPLATE\"].prompt_additions[]" "$TEMPLATES_FILE" 2>/dev/null)
 
 if [ "$agent" = "null" ] || [ -z "$agent" ]; then
     echo "❌ 未知模板: $TEMPLATE"
